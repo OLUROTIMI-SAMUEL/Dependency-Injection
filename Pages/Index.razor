@@ -1,0 +1,36 @@
+﻿@page "/"
+@using DependencyInjectionDemo.Logic
+@inject IDemoLogic Logic
+@inject ILogger<Index> logger
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<h3>Value1: @Logic.Value1</h3>
+<h3>Value2: @Logic.Value2</h3>
+
+
+@code {
+    // private DemoLogic Logic;
+
+    protected override void OnInitialized()
+    {
+        //SO WE WILL instatiate Logic , therefore when when we initailise this page we will get the value for logic.
+        //  This gives us a new intance for logic everytime we load the page
+        // Logic = new(); // so there since we have injected the "DemoLogic" in our program.cs we can ask for it in line 3
+        // meaning we don't  need the method any more in line 15.
+        
+        
+        // this is what we call structured logging and not we dont make use of $ because it is not string Encapsulation . 
+        logger.LogInformation("Dispalying values of {Value1} and {Value2}",
+        Logic.Value1,
+        Logic.Value2);
+
+    }
+
+    // our line 4 is already in our dependency injection because it allows us to log any type of Message we want.the Index there is the Index class
+    //and it allows us to have more information that the class is logging from, which is also line 4. 
+}
+
+ 
